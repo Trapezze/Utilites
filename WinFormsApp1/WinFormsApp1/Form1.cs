@@ -5,6 +5,11 @@ namespace WinFormsApp1
 
         int count = 0;
         Random rnd;
+        char[] spec_chars = new char[]
+            {
+                '!','@','#','$','%','^','&','*','(',')','`','{','}'
+            };
+
         public MainForm()
         {
             InitializeComponent();
@@ -96,7 +101,97 @@ namespace WinFormsApp1
 
         private void tsmPasteDate_Click(object sender, EventArgs e)
         {
+            RTBNotepad.AppendText(DateTime.Now.ToShortDateString() + "\n");
+        }//Вставляем дату
 
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            //Кнопка выхода в контексном меню
         }
+
+        private void tsmPasteTime_Click(object sender, EventArgs e)
+        {
+            RTBNotepad.AppendText(DateTime.Now.ToShortTimeString() + "\n");
+        }//Вставляем Время
+
+        private void pasteTimedateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string dateTimeString = $"{DateTime.Now.ToShortTimeString()} {DateTime.Now.ToShortDateString()}";
+            RTBNotepad.AppendText(dateTimeString + "\n");
+            //Вставляем дату+время
+        }
+
+        private void tsmSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RTBNotepad.SaveFile("notepad.rtf");
+                //Кнопка для созранения
+            }
+            catch
+            {
+                MessageBox.Show("Error with saving!!!");
+            }
+        }
+
+        void LoadNotepad()
+        {
+            try
+            {
+                RTBNotepad.LoadFile("notepad.rtf");
+                //Кнопка загрузки
+            }
+            catch
+            {
+                MessageBox.Show("Error with loading!!!");
+            }
+        }
+        // Через блок try-catch отлавливаем ошибки - "при загрузке" и "при сохранении" (файл notepad лежит в папке WinFormsApp1\bin\Debug\net6.0-windows
+        //Ситуация как можно воспроизвести ошибку - удалить файл notepad, и ошибка будет выведена
+
+        private void tsmLoad_Click(object sender, EventArgs e)
+        {
+            LoadNotepad();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            LoadNotepad();
+            clbPassword.SetItemChecked(0, true);
+            clbPassword.SetItemChecked(1, true);
+            //Сохраняет последнюю операцию галочек для правила создания пароля
+        }
+
+        private void btnCreatePass_Click(object sender, EventArgs e)
+        {
+            if (clbPassword.CheckedItems.Count == 0) return;
+            string password = "";
+            for (int i = 0; i < nudLenghtPass.Value; i++)
+            {
+                int p = rnd.Next(0, clbPassword.CheckedItems.Count);
+                string s = clbPassword.CheckedItems[p].ToString();
+                switch (s)
+                {
+                    case "Numbers":
+                        password += rnd.Next(10).ToString();
+                        break;
+                    case "Capital Letters":
+                        password += Convert.ToChar(rnd.Next(65, 88));
+                        break;
+                    case "Lower case":
+                        password += Convert.ToChar(rnd.Next(97, 122));
+                        break;
+                    default:
+                        password += spec_chars[rnd.Next(spec_chars.Length)];
+                        break;
+                }
+                tbPassword.Text = password;
+                Clipboard.SetText(password);
+                //Сохраняем пароль в буфер обмена
+            }
+            //Кнопка и логика для создания пароля
+        }
+        //Через обработчик (значок молнии) создали функцию 
     }
 }

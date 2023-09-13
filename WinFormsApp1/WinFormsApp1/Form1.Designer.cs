@@ -33,6 +33,13 @@
             tsmiExit = new ToolStripMenuItem();
             помощьToolStripMenuItem = new ToolStripMenuItem();
             tsmiAbout = new ToolStripMenuItem();
+            notebookToolStripMenuItem = new ToolStripMenuItem();
+            tsmPasteDate = new ToolStripMenuItem();
+            tsmPasteTime = new ToolStripMenuItem();
+            tsmPasteTimedate = new ToolStripMenuItem();
+            tsmSave = new ToolStripMenuItem();
+            tsmLoad = new ToolStripMenuItem();
+            tsmExit = new ToolStripMenuItem();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             btnExit = new Button();
@@ -53,10 +60,13 @@
             lblRandom = new Label();
             btnAsk = new Button();
             tabPage3 = new TabPage();
-            rchtxtbox = new RichTextBox();
-            notebookToolStripMenuItem = new ToolStripMenuItem();
-            tsmPasteDate = new ToolStripMenuItem();
-            tsmPasteTime = new ToolStripMenuItem();
+            RTBNotepad = new RichTextBox();
+            tabPage4 = new TabPage();
+            tbPassword = new TextBox();
+            btnCreatePass = new Button();
+            lblLenghtPass = new Label();
+            nudLenghtPass = new NumericUpDown();
+            clbPassword = new CheckedListBox();
             menuStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -64,6 +74,8 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             tabPage3.SuspendLayout();
+            tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudLenghtPass).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -72,7 +84,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, помощьToolStripMenuItem, notebookToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(540, 33);
+            menuStrip1.Size = new Size(546, 33);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -100,20 +112,73 @@
             // tsmiAbout
             // 
             tsmiAbout.Name = "tsmiAbout";
-            tsmiAbout.Size = new Size(270, 34);
+            tsmiAbout.Size = new Size(167, 34);
             tsmiAbout.Text = "About";
             tsmiAbout.Click += tsmiAbout_Click;
+            // 
+            // notebookToolStripMenuItem
+            // 
+            notebookToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { tsmPasteDate, tsmPasteTime, tsmPasteTimedate, tsmSave, tsmLoad, tsmExit });
+            notebookToolStripMenuItem.Name = "notebookToolStripMenuItem";
+            notebookToolStripMenuItem.Size = new Size(113, 29);
+            notebookToolStripMenuItem.Text = "Notebook";
+            // 
+            // tsmPasteDate
+            // 
+            tsmPasteDate.Name = "tsmPasteDate";
+            tsmPasteDate.ShortcutKeys = Keys.Control | Keys.D1;
+            tsmPasteDate.Size = new Size(319, 34);
+            tsmPasteDate.Text = "Paste date";
+            tsmPasteDate.Click += tsmPasteDate_Click;
+            // 
+            // tsmPasteTime
+            // 
+            tsmPasteTime.Name = "tsmPasteTime";
+            tsmPasteTime.ShortcutKeys = Keys.Control | Keys.D2;
+            tsmPasteTime.Size = new Size(319, 34);
+            tsmPasteTime.Text = "Paste time";
+            tsmPasteTime.Click += tsmPasteTime_Click;
+            // 
+            // tsmPasteTimedate
+            // 
+            tsmPasteTimedate.Name = "tsmPasteTimedate";
+            tsmPasteTimedate.ShortcutKeys = Keys.Control | Keys.D3;
+            tsmPasteTimedate.Size = new Size(319, 34);
+            tsmPasteTimedate.Text = "Paste time+date";
+            tsmPasteTimedate.Click += pasteTimedateToolStripMenuItem_Click;
+            // 
+            // tsmSave
+            // 
+            tsmSave.Name = "tsmSave";
+            tsmSave.Size = new Size(319, 34);
+            tsmSave.Text = "Save";
+            tsmSave.Click += tsmSave_Click;
+            // 
+            // tsmLoad
+            // 
+            tsmLoad.Name = "tsmLoad";
+            tsmLoad.Size = new Size(319, 34);
+            tsmLoad.Text = "Load";
+            tsmLoad.Click += tsmLoad_Click;
+            // 
+            // tsmExit
+            // 
+            tsmExit.Name = "tsmExit";
+            tsmExit.Size = new Size(319, 34);
+            tsmExit.Text = "Exit";
+            tsmExit.Click += exitToolStripMenuItem_Click;
             // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage4);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 33);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(540, 467);
+            tabControl1.Size = new Size(546, 500);
             tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -126,7 +191,7 @@
             tabPage1.Location = new Point(4, 34);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(532, 429);
+            tabPage1.Size = new Size(538, 462);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Counter";
             tabPage1.UseVisualStyleBackColor = true;
@@ -196,7 +261,7 @@
             tabPage2.Location = new Point(4, 34);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(532, 429);
+            tabPage2.Size = new Size(538, 462);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Generator";
             tabPage2.UseVisualStyleBackColor = true;
@@ -307,53 +372,94 @@
             // 
             // tabPage3
             // 
-            tabPage3.Controls.Add(rchtxtbox);
+            tabPage3.Controls.Add(RTBNotepad);
             tabPage3.Location = new Point(4, 34);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(532, 429);
+            tabPage3.Size = new Size(538, 462);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Notebook";
             tabPage3.UseVisualStyleBackColor = true;
             // 
-            // rchtxtbox
+            // RTBNotepad
             // 
-            rchtxtbox.Dock = DockStyle.Fill;
-            rchtxtbox.Location = new Point(0, 0);
-            rchtxtbox.Name = "rchtxtbox";
-            rchtxtbox.Size = new Size(532, 429);
-            rchtxtbox.TabIndex = 0;
-            rchtxtbox.Text = "";
+            RTBNotepad.Dock = DockStyle.Fill;
+            RTBNotepad.Location = new Point(0, 0);
+            RTBNotepad.Name = "RTBNotepad";
+            RTBNotepad.Size = new Size(538, 462);
+            RTBNotepad.TabIndex = 0;
+            RTBNotepad.Text = "";
             // 
-            // notebookToolStripMenuItem
+            // tabPage4
             // 
-            notebookToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { tsmPasteDate, tsmPasteTime });
-            notebookToolStripMenuItem.Name = "notebookToolStripMenuItem";
-            notebookToolStripMenuItem.Size = new Size(113, 29);
-            notebookToolStripMenuItem.Text = "Notebook";
+            tabPage4.Controls.Add(tbPassword);
+            tabPage4.Controls.Add(btnCreatePass);
+            tabPage4.Controls.Add(lblLenghtPass);
+            tabPage4.Controls.Add(nudLenghtPass);
+            tabPage4.Controls.Add(clbPassword);
+            tabPage4.Location = new Point(4, 34);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Size = new Size(538, 462);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "Pass Generator";
+            tabPage4.UseVisualStyleBackColor = true;
             // 
-            // tsmPasteDate
+            // tbPassword
             // 
-            tsmPasteDate.Name = "tsmPasteDate";
-            tsmPasteDate.Size = new Size(270, 34);
-            tsmPasteDate.Text = "Paste date";
-            tsmPasteDate.Click += tsmPasteDate_Click;
+            tbPassword.Location = new Point(244, 203);
+            tbPassword.Name = "tbPassword";
+            tbPassword.Size = new Size(239, 31);
+            tbPassword.TabIndex = 4;
             // 
-            // tsmPasteTime
+            // btnCreatePass
             // 
-            tsmPasteTime.Name = "tsmPasteTime";
-            tsmPasteTime.Size = new Size(270, 34);
-            tsmPasteTime.Text = "Paste time";
+            btnCreatePass.Location = new Point(8, 203);
+            btnCreatePass.Name = "btnCreatePass";
+            btnCreatePass.Size = new Size(202, 34);
+            btnCreatePass.TabIndex = 3;
+            btnCreatePass.Text = "Create Password";
+            btnCreatePass.UseVisualStyleBackColor = true;
+            btnCreatePass.Click += btnCreatePass_Click;
+            // 
+            // lblLenghtPass
+            // 
+            lblLenghtPass.AutoSize = true;
+            lblLenghtPass.Location = new Point(105, 155);
+            lblLenghtPass.Name = "lblLenghtPass";
+            lblLenghtPass.Size = new Size(156, 25);
+            lblLenghtPass.TabIndex = 2;
+            lblLenghtPass.Text = "Lenght Password";
+            // 
+            // nudLenghtPass
+            // 
+            nudLenghtPass.Location = new Point(8, 153);
+            nudLenghtPass.Maximum = new decimal(new int[] { 22, 0, 0, 0 });
+            nudLenghtPass.Minimum = new decimal(new int[] { 8, 0, 0, 0 });
+            nudLenghtPass.Name = "nudLenghtPass";
+            nudLenghtPass.Size = new Size(81, 31);
+            nudLenghtPass.TabIndex = 1;
+            nudLenghtPass.Value = new decimal(new int[] { 8, 0, 0, 0 });
+            // 
+            // clbPassword
+            // 
+            clbPassword.CheckOnClick = true;
+            clbPassword.FormattingEnabled = true;
+            clbPassword.Items.AddRange(new object[] { "Numbers", "Capital letters", "Lower case", "Special symbols !@#$%^&*()`{}" });
+            clbPassword.Location = new Point(8, 3);
+            clbPassword.Name = "clbPassword";
+            clbPassword.Size = new Size(323, 144);
+            clbPassword.TabIndex = 0;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(11F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(540, 500);
+            ClientSize = new Size(546, 533);
             Controls.Add(tabControl1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
             Text = "Utilit";
+            Load += MainForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             tabControl1.ResumeLayout(false);
@@ -364,6 +470,9 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             tabPage3.ResumeLayout(false);
+            tabPage4.ResumeLayout(false);
+            tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudLenghtPass).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -395,9 +504,19 @@
         private Button btnRandomCopy;
         private CheckBox chkboxNotRepeat;
         private TabPage tabPage3;
-        private RichTextBox rchtxtbox;
+        private RichTextBox RTBNotepad;
         private ToolStripMenuItem notebookToolStripMenuItem;
         private ToolStripMenuItem tsmPasteDate;
         private ToolStripMenuItem tsmPasteTime;
+        private ToolStripMenuItem tsmExit;
+        private ToolStripMenuItem tsmPasteTimedate;
+        private ToolStripMenuItem tsmSave;
+        private ToolStripMenuItem tsmLoad;
+        private TabPage tabPage4;
+        private CheckedListBox clbPassword;
+        private Label lblLenghtPass;
+        private NumericUpDown nudLenghtPass;
+        private Button btnCreatePass;
+        private TextBox tbPassword;
     }
 }
