@@ -9,11 +9,23 @@ namespace WinFormsApp1
             {
                 '!','@','#','$','%','^','&','*','(',')','`','{','}'
             };
+        Dictionary<string, double> metrica;
 
         public MainForm()
         {
             InitializeComponent();
             rnd = new Random();
+            metrica = new Dictionary<string, double>();
+            metrica.Add("mm", 1);
+            metrica.Add("cm", 10);
+            metrica.Add("dm", 100);
+            metrica.Add("km", 10000);
+            metrica.Add("m", 1000);
+            metrica.Add("mile", 11609344);
+            metrica.Add("l", 1000);
+            metrica.Add("ml", 100);
+            metrica.Add("kg", 10000);
+            metrica.Add("gm", 100);
         }
 
         private void tsmiExit_Click(object sender, EventArgs e)
@@ -192,6 +204,79 @@ namespace WinFormsApp1
             }
             //Кнопка и логика для создания пароля
         }
-        //Через обработчик (значок молнии) создали функцию 
+
+        private void cbTo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConvert_Click(object sender, EventArgs e)
+        {
+            double m1 = metrica[cbFrom.Text];
+            double m2 = metrica[cbTo.Text];
+            double n = Convert.ToDouble(tbFrom.Text);
+            tbTo.Text = (n * m1 / m2).ToString();
+            //Через обработчик (значок молнии) создали функцию 
+        }
+
+        private void btnSwap_Click(object sender, EventArgs e)
+        {
+            string t = cbFrom.Text;
+            cbFrom.Text = cbTo.Text;
+            cbTo.Text = t;
+            //Логика для того чтобы поменять местами значения. С ними же меняются и цифры
+        }
+
+        private void cbMetric_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbMetric.Text)
+            {
+                case "Lenght":
+                    metrica.Add("cm", 10);
+                    metrica.Add("dm", 100);
+                    metrica.Add("km", 10000);
+                    metrica.Add("m", 1000);
+                    metrica.Add("mile", 11609344);
+                    cbFrom.Items.Clear();
+                    cbFrom.Items.Add("mm");
+                    cbFrom.Items.Add("cm");
+                    cbFrom.Items.Add("dm");
+                    cbFrom.Items.Add("km");
+                    cbFrom.Items.Add("mile");
+                    cbFrom.Items.Clear();
+                    cbTo.Items.Add("mm");
+                    cbTo.Items.Add("cm");
+                    cbTo.Items.Add("dm");
+                    cbTo.Items.Add("km");
+                    cbTo.Items.Add("mile");
+                    break;
+
+                case "Weight":
+                    metrica.Clear();
+                    metrica.Add("gm", 1);
+                    metrica.Add("kg", 1000);
+                    metrica.Add("t", 1000000);
+                    metrica.Add("lb", 453.6);
+                    metrica.Add("oz", 283);
+                    cbFrom.Items.Clear();
+                    cbFrom.Items.Add("mm");
+                    cbFrom.Items.Add("cm");
+                    cbFrom.Items.Add("dm");
+                    cbFrom.Items.Add("km");
+                    cbFrom.Items.Add("mile");
+                    cbFrom.Items.Clear();
+                    cbTo.Items.Add("gm");
+                    cbTo.Items.Add("kg");
+                    cbTo.Items.Add("t");
+                    cbTo.Items.Add("lb");
+                    cbTo.Items.Add("oz");
+                    cbFrom.Text = "g";
+                    cbTo.Text = "g";
+                    break;
+                default:
+                    break;
+
+            }
+        }
     }
 }

@@ -67,6 +67,14 @@
             lblLenghtPass = new Label();
             nudLenghtPass = new NumericUpDown();
             clbPassword = new CheckedListBox();
+            tabPage5 = new TabPage();
+            cbMetric = new ComboBox();
+            btnSwap = new Button();
+            tbTo = new TextBox();
+            tbFrom = new TextBox();
+            btnConvert = new Button();
+            cbTo = new ComboBox();
+            cbFrom = new ComboBox();
             menuStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -76,6 +84,7 @@
             tabPage3.SuspendLayout();
             tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudLenghtPass).BeginInit();
+            tabPage5.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -174,6 +183,7 @@
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
+            tabControl1.Controls.Add(tabPage5);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 33);
             tabControl1.Name = "tabControl1";
@@ -449,6 +459,91 @@
             clbPassword.Size = new Size(323, 144);
             clbPassword.TabIndex = 0;
             // 
+            // tabPage5
+            // 
+            tabPage5.Controls.Add(cbMetric);
+            tabPage5.Controls.Add(btnSwap);
+            tabPage5.Controls.Add(tbTo);
+            tabPage5.Controls.Add(tbFrom);
+            tabPage5.Controls.Add(btnConvert);
+            tabPage5.Controls.Add(cbTo);
+            tabPage5.Controls.Add(cbFrom);
+            tabPage5.Location = new Point(4, 34);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Size = new Size(538, 462);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "Converter";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // cbMetric
+            // 
+            cbMetric.AutoCompleteCustomSource.AddRange(new string[] { "length", "weight" });
+            cbMetric.FormattingEnabled = true;
+            cbMetric.Items.AddRange(new object[] { "Lenght", "Weight" });
+            cbMetric.Location = new Point(321, 100);
+            cbMetric.Name = "cbMetric";
+            cbMetric.Size = new Size(141, 33);
+            cbMetric.TabIndex = 6;
+            cbMetric.Text = "Lenght";
+            cbMetric.SelectedIndexChanged += cbMetric_SelectedIndexChanged;
+            // 
+            // btnSwap
+            // 
+            btnSwap.Location = new Point(173, 15);
+            btnSwap.Name = "btnSwap";
+            btnSwap.Size = new Size(112, 34);
+            btnSwap.TabIndex = 5;
+            btnSwap.Text = "Swap";
+            btnSwap.UseVisualStyleBackColor = true;
+            btnSwap.Click += btnSwap_Click;
+            // 
+            // tbTo
+            // 
+            tbTo.Location = new Point(321, 54);
+            tbTo.Name = "tbTo";
+            tbTo.ReadOnly = true;
+            tbTo.Size = new Size(141, 31);
+            tbTo.TabIndex = 4;
+            // 
+            // tbFrom
+            // 
+            tbFrom.Location = new Point(10, 54);
+            tbFrom.Name = "tbFrom";
+            tbFrom.Size = new Size(131, 31);
+            tbFrom.TabIndex = 3;
+            tbFrom.Text = "1";
+            // 
+            // btnConvert
+            // 
+            btnConvert.Location = new Point(29, 134);
+            btnConvert.Name = "btnConvert";
+            btnConvert.Size = new Size(112, 34);
+            btnConvert.TabIndex = 2;
+            btnConvert.Text = "Convert";
+            btnConvert.UseVisualStyleBackColor = true;
+            btnConvert.Click += btnConvert_Click;
+            // 
+            // cbTo
+            // 
+            cbTo.FormattingEnabled = true;
+            cbTo.Items.AddRange(new object[] { "mm", "cm", "dm", "km", "m", "mile", "l", "kg", "gm" });
+            cbTo.Location = new Point(321, 15);
+            cbTo.Name = "cbTo";
+            cbTo.Size = new Size(141, 33);
+            cbTo.TabIndex = 1;
+            cbTo.Text = "mm";
+            cbTo.SelectedIndexChanged += cbTo_SelectedIndexChanged;
+            // 
+            // cbFrom
+            // 
+            cbFrom.FormattingEnabled = true;
+            cbFrom.Items.AddRange(new object[] { "mm", "cm", "dm", "km", "m", "mile", "l", "kg", "gm" });
+            cbFrom.Location = new Point(10, 15);
+            cbFrom.Name = "cbFrom";
+            cbFrom.Size = new Size(131, 33);
+            cbFrom.TabIndex = 0;
+            cbFrom.Text = "mm";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(11F, 25F);
@@ -473,6 +568,8 @@
             tabPage4.ResumeLayout(false);
             tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudLenghtPass).EndInit();
+            tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -518,5 +615,13 @@
         private NumericUpDown nudLenghtPass;
         private Button btnCreatePass;
         private TextBox tbPassword;
+        private TabPage tabPage5;
+        private TextBox tbTo;
+        private TextBox tbFrom;
+        private Button btnConvert;
+        private ComboBox cbTo;
+        private ComboBox cbFrom;
+        private Button btnSwap;
+        private ComboBox cbMetric;
     }
 }
